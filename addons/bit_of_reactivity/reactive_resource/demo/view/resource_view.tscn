@@ -1,0 +1,32 @@
+[gd_scene load_steps=3 format=3 uid="uid://dhhvfk5xjhy52"]
+
+[ext_resource type="Script" path="res://addons/bit_of_reactivity/reactive_resource/demo/view/resource_view.gd" id="1_pcvut"]
+[ext_resource type="PackedScene" uid="uid://irihnp1w0lio" path="res://addons/bit_of_reactivity/reactive_resource/demo/view/subresource_view.tscn" id="2_qw8h7"]
+
+[node name="ResourceView" type="VBoxContainer" node_paths=PackedStringArray("_title_label", "_data_line_edit", "_sub_resource_view")]
+size_flags_horizontal = 6
+size_flags_vertical = 4
+script = ExtResource("1_pcvut")
+_title = "Title"
+_title_label = NodePath("TitleLabel")
+_data_line_edit = NodePath("LineEdit")
+_sub_resource_view = NodePath("SubresourceView")
+
+[node name="TitleLabel" type="Label" parent="."]
+layout_mode = 2
+text = "Title"
+horizontal_alignment = 1
+
+[node name="DataLabel" type="Label" parent="."]
+layout_mode = 2
+text = "some_important_data"
+
+[node name="LineEdit" type="LineEdit" parent="."]
+layout_mode = 2
+caret_blink = true
+caret_blink_interval = 0.5
+
+[node name="SubresourceView" parent="." instance=ExtResource("2_qw8h7")]
+layout_mode = 2
+
+[connection signal="text_changed" from="LineEdit" to="." method="_on_line_edit_text_changed"]

@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://irihnp1w0lio"]
+
+[ext_resource type="Script" path="res://addons/bit_of_reactivity/reactive_resource/demo/view/sub_resource_view.gd" id="1_l5dy2"]
+
+[node name="SubResourceView" type="VBoxContainer" node_paths=PackedStringArray("_data_spin_box")]
+script = ExtResource("1_l5dy2")
+_data_spin_box = NodePath("SpinBox")
+
+[node name="DataLabel" type="Label" parent="."]
+layout_mode = 2
+text = "another_important_data"
+
+[node name="SpinBox" type="SpinBox" parent="."]
+layout_mode = 2
+max_value = 1e+08
+
+[connection signal="value_changed" from="SpinBox" to="." method="_on_spin_box_value_changed"]

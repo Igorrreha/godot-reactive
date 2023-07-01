@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://b1uepa7g7e6ye"]
+
+[ext_resource type="Script" path="res://addons/bit_of_reactivity/reactive_resource/demo/reactive_resource_demo.gd" id="1_yx1s3"]
+[ext_resource type="PackedScene" uid="uid://dhhvfk5xjhy52" path="res://addons/bit_of_reactivity/reactive_resource/demo/view/resource_view.tscn" id="2_6uow5"]
+
+[node name="ObservableResourceDemo" type="HBoxContainer" node_paths=PackedStringArray("_resource_view", "_resource_model")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_yx1s3")
+_resource_view = NodePath("ResourceView")
+_resource_model = NodePath("ResourceModel")
+
+[node name="ResourceView" parent="." instance=ExtResource("2_6uow5")]
+layout_mode = 2
+_title = "View"
+
+[node name="ResourceModel" parent="." instance=ExtResource("2_6uow5")]
+layout_mode = 2
+_title = "Model"
