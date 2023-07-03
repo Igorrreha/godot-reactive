@@ -1,3 +1,4 @@
+@icon("res://addons/bit_of_reactivity/reactive_resource/reactive_resource.svg")
 class_name ReactiveResource
 extends Resource
 

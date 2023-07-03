@@ -13,7 +13,11 @@ config_version=5
 config/name="Reactive Test"
 run/main_scene="res://addons/bit_of_reactivity/reactive_resource/demo/reactive_resource_demo.tscn"
 config/features=PackedStringArray("4.0", "GL Compatibility")
-config/icon="res://icon.svg"
+config/icon="res://addons/bit_of_reactivity/reactive_resource/reactive_resource.png"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/bit_of_reactivity/plugin.cfg")
 
 [rendering]
 
