@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   height="16"
+   viewBox="0 0 16 16"
+   width="16"
+   version="1.1"
+   id="svg4"
+   sodipodi:docname="reactive_resource.svg"
+   inkscape:version="1.2.2 (732a01da63, 2022-12-09)"
+   inkscape:export-filename="reactive_resource.png"
+   inkscape:export-xdpi="877.71429"
+   inkscape:export-ydpi="877.71429"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs8" />
+  <sodipodi:namedview
+     id="namedview6"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     showgrid="false"
+     inkscape:zoom="27.40625"
+     inkscape:cx="8.3922463"
+     inkscape:cy="7.3340935"
+     inkscape:window-width="1840"
+     inkscape:window-height="1057"
+     inkscape:window-x="1992"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg4" />
+  <path
+     id="path2"
+     d="M 8,0.99804688 A 1,1 0 0 0 7.5527344,1.1035156 l -6,3 A 1,1 0 0 0 1,4.9980469 v 6.0000001 a 1,1 0 0 0 0.5527344,0.894531 l 6,3 a 1,1 0 0 0 0.8945312,0 l 6.0000004,-3 A 1,1 0 0 0 15,10.998047 V 4.9980469 A 1,1 0 0 0 14.447266,4.1035156 l -6.0000004,-3 A 1,1 0 0 0 8,0.99804688 Z M 8.0371094,3.1171875 11.800781,4.9980469 8.0371094,6.8808594 4.2734375,4.9980469 Z M 13.021484,6.1054688 V 10.986328 C 12.304895,10.598151 11.588555,10.209714 10.513672,10.753906 L 9.0800781,11.480469 V 9.6015625 L 10.513672,8.8769531 c 1.074883,-0.544194 1.791223,-1.6577107 2.507812,-2.7714843 z m -9.9843746,0.5097656 4,2 v 3.7656246 l -4,-2 z M 13.617188,7.3535156 c 0.6833,-0.054385 0.604656,1.517999 -0.236329,1.9492188 V 7.4257812 c 0.087,-0.043518 0.165642,-0.06664 0.236329,-0.072266 z M 10.513672,11.128906 10.15625,12.8125 9.4394531,13.175781 v -1.501953 z"
+     inkscape:highlight-color="#acacac"
+     style="fill:#cccccc;fill-opacity:1" />
+</svg>
