@@ -12,16 +12,13 @@ var _state: DemoObservableResource
 
 
 func setup(data: DemoObservableResource) -> void:
-	if _state:
-		_state.remove_callback("some_important_data", _on_important_data_changed)
-		_state.remove_callback("sub_resource", _on_sub_resource_changed)
-	
-	_state = data
-	_state.bind("some_important_data", _on_important_data_changed, _on_line_edit_text_changed)
-	_state.bind("sub_resource", _on_sub_resource_changed)
-	
-	_on_important_data_changed()
-	_on_sub_resource_changed()
+	# short syntax
+	data.setup_bindings(self, "_state", [
+		ReactiveResource.Binding
+			.new("some_important_data", _on_important_data_changed, _on_line_edit_text_changed),
+		ReactiveResource.Binding
+			.new("sub_resource", _on_sub_resource_changed),
+	])
 
 
 func _ready() -> void:

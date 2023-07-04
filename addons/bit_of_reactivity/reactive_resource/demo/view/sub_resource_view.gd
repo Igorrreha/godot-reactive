@@ -8,6 +8,7 @@ var _state: DemoObservableSubResource
 
 
 func setup(data: DemoObservableSubResource) -> void:
+	# long syntax (default)
 	if _state:
 		_state.remove_callback("another_important_data", _on_important_data_changed)
 	
