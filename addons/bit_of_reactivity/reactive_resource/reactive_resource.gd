@@ -8,8 +8,11 @@ extends Resource
 ## to custom callables call
 
 
-## Collection of active [ReactiveResource.Binding]s for this resource properties
+## Collection of active [ReactiveResource.Binding]s of this resource properties
 var _bindings: Dictionary#[StringName, Array[ReactiveResource.Binding]]
+
+## Collection of [ReactiveResource.PropertyHandler]s of this resource properties
+var _handlers: Dictionary#[StringName, PropertyHandler]
 
 
 ## "Syntactic sugar" for complex setuping of an object.
@@ -18,7 +21,7 @@ var _bindings: Dictionary#[StringName, Array[ReactiveResource.Binding]]
 ## 2. creates new bindings
 ## 3. sets resource_property value to self
 ## 4. calls the callbacks of the created bindings
-func setup_bindings(resource_holder: Object, resource_property: String,
+func setup_bindings(resource_holder: Object, resource_property: StringName,
 		bindings: Array[Binding]) -> void:
 	if not resource_property in resource_holder:
 		printerr("Binding failed! %s is not in %s" % [resource_property, resource_holder])
@@ -35,6 +38,10 @@ func setup_bindings(resource_holder: Object, resource_property: String,
 	
 	for binding in bindings:
 		binding.callback.call()
+
+
+func _get_value(property: StringName) -> Variant:
+	return self[property]
 
 
 ## Setter for reactive property of resource.
@@ -71,8 +78,56 @@ func remove_callback(property: StringName, callback: Callable) -> void:
 		binding.callback != callback)
 
 
+## Returns [ReactiveResource.PropertyHandler] of given property
+func get_handler(property: StringName) -> PropertyHandler:
+	if not _handlers.has(property):
+		_handlers[property] = PropertyHandler.new(property, _get_value, set_value,
+			bind, remove_callback)
+	
+	return _handlers[property] as PropertyHandler
+
+
+## Wrapper of some property of [ReactiveResource].
+## Can be used to provide parts of the [ReactiveResource] to classes where using the
+## entire resource is redundant.
+## Most common usecase is making collections reactive
+## (please, check the plugin demo if you need more info)
+class PropertyHandler:
+	var _get_value_method: Callable
+	var _set_value_method: Callable
+	var _bind_method: Callable
+	var _remove_callback_method: Callable
+	var property: StringName
+	
+	
+	func get_value() -> Variant:
+		return _get_value_method.call(property)
+	
+	
+	func set_value(value, caller: Callable = func():) -> void:
+		_set_value_method.call(property, value, caller)
+	
+	
+	func bind(callback: Callable, caller: Callable = func():) -> void:
+		_bind_method.call(property, callback, caller)
+	
+	
+	func remove_callback(callback: Callable) -> void:
+		if _remove_callback_method.is_valid():
+			_remove_callback_method.call(property, callback)
+	
+	
+	func _init(property: StringName, get_value_method: Callable, set_value_method: Callable,
+			bind_method: Callable, remove_callback_method: Callable) -> void:
+		_get_value_method = get_value_method
+		_set_value_method = set_value_method
+		_bind_method = bind_method
+		_remove_callback_method = remove_callback_method
+		self.property = property
+
+
 class Binding:
-	var property: String
+	var property: StringName
 	## The method that invokes at binding applying
 	var callback: Callable
 	## The caller is used for evading of resetting property by callback in the place where it
@@ -80,7 +135,7 @@ class Binding:
 	var caller: Callable
 	
 	
-	func _init(property: String, callback: Callable, caller: Callable = func():) -> void:
+	func _init(property: StringName, callback: Callable, caller: Callable = func():) -> void:
 		self.callback = callback
 		self.property = property
 		self.caller = caller
