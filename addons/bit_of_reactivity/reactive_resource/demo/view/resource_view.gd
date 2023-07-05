@@ -8,6 +8,8 @@ extends VBoxContainer
 @export var _data_line_edit: LineEdit
 @export var _sub_resource_view: DemoSubResourceView
 
+@export var _simple_collection_container: DemoReactiveCollectionContainer
+
 var _state: DemoObservableResource
 
 
@@ -19,6 +21,8 @@ func setup(data: DemoObservableResource) -> void:
 		ReactiveResource.Binding
 			.new("sub_resource", _on_sub_resource_changed),
 	])
+	
+	_simple_collection_container.setup(data.get_handler("simple_collection"))
 
 
 func _ready() -> void:

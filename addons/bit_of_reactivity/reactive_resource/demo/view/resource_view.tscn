@@ -1,9 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://dhhvfk5xjhy52"]
+[gd_scene load_steps=5 format=3 uid="uid://dhhvfk5xjhy52"]
 
 [ext_resource type="Script" path="res://addons/bit_of_reactivity/reactive_resource/demo/view/resource_view.gd" id="1_pcvut"]
 [ext_resource type="PackedScene" uid="uid://irihnp1w0lio" path="res://addons/bit_of_reactivity/reactive_resource/demo/view/subresource_view.tscn" id="2_qw8h7"]
+[ext_resource type="Script" path="res://addons/bit_of_reactivity/reactive_resource/demo/view/reactive_collection_container.gd" id="3_nu7al"]
+[ext_resource type="PackedScene" uid="uid://c8t13fcytpgy7" path="res://addons/bit_of_reactivity/reactive_resource/demo/view/collection_item.tscn" id="4_0g8wu"]
 
-[node name="ResourceView" type="VBoxContainer" node_paths=PackedStringArray("_title_label", "_data_line_edit", "_sub_resource_view")]
+[node name="ResourceView" type="VBoxContainer" node_paths=PackedStringArray("_title_label", "_data_line_edit", "_sub_resource_view", "_simple_collection_container")]
 size_flags_horizontal = 6
 size_flags_vertical = 4
 script = ExtResource("1_pcvut")
@@ -11,6 +13,7 @@ _title = "Title"
 _title_label = NodePath("TitleLabel")
 _data_line_edit = NodePath("LineEdit")
 _sub_resource_view = NodePath("SubresourceView")
+_simple_collection_container = NodePath("ReactiveCollectionContainer")
 
 [node name="TitleLabel" type="Label" parent="."]
 layout_mode = 2
@@ -29,4 +32,32 @@ caret_blink_interval = 0.5
 [node name="SubresourceView" parent="." instance=ExtResource("2_qw8h7")]
 layout_mode = 2
 
+[node name="ArrayLabel" type="Label" parent="."]
+layout_mode = 2
+text = "collection"
+
+[node name="ReactiveCollectionContainer" type="VBoxContainer" parent="." node_paths=PackedStringArray("_items_container")]
+layout_mode = 2
+script = ExtResource("3_nu7al")
+_collection_item_tscn = ExtResource("4_0g8wu")
+_items_container = NodePath("ItemsContainer")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ReactiveCollectionContainer"]
+layout_mode = 2
+
+[node name="Add" type="Button" parent="ReactiveCollectionContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Add"
+
+[node name="Remove" type="Button" parent="ReactiveCollectionContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Remove"
+
+[node name="ItemsContainer" type="VBoxContainer" parent="ReactiveCollectionContainer"]
+layout_mode = 2
+
 [connection signal="text_changed" from="LineEdit" to="." method="_on_line_edit_text_changed"]
+[connection signal="pressed" from="ReactiveCollectionContainer/HBoxContainer/Add" to="ReactiveCollectionContainer" method="add_item"]
+[connection signal="pressed" from="ReactiveCollectionContainer/HBoxContainer/Remove" to="ReactiveCollectionContainer" method="remove_last_item"]
