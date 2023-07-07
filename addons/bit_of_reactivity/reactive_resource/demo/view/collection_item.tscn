@@ -1,3 +1,6 @@
-[gd_scene format=3 uid="uid://c8t13fcytpgy7"]
+[gd_scene load_steps=2 format=3 uid="uid://c8t13fcytpgy7"]
+
+[ext_resource type="Script" path="res://addons/bit_of_reactivity/reactive_resource/demo/view/collection_item.gd" id="1_xqnse"]
 
 [node name="CollectionItem" type="Label"]
+script = ExtResource("1_xqnse")

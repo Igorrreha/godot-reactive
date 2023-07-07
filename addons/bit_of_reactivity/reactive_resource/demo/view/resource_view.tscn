@@ -13,7 +13,7 @@ _title = "Title"
 _title_label = NodePath("TitleLabel")
 _data_line_edit = NodePath("LineEdit")
 _sub_resource_view = NodePath("SubresourceView")
-_simple_collection_container = NodePath("ReactiveCollectionContainer")
+_simple_collection_container = NodePath("VBoxContainer/ReactiveCollectionContainer")
 
 [node name="TitleLabel" type="Label" parent="."]
 layout_mode = 2
@@ -36,28 +36,27 @@ layout_mode = 2
 layout_mode = 2
 text = "collection"
 
-[node name="ReactiveCollectionContainer" type="VBoxContainer" parent="." node_paths=PackedStringArray("_items_container")]
-layout_mode = 2
-script = ExtResource("3_nu7al")
-_collection_item_tscn = ExtResource("4_0g8wu")
-_items_container = NodePath("ItemsContainer")
-
-[node name="HBoxContainer" type="HBoxContainer" parent="ReactiveCollectionContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
 
-[node name="Add" type="Button" parent="ReactiveCollectionContainer/HBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Add" type="Button" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Add"
 
-[node name="Remove" type="Button" parent="ReactiveCollectionContainer/HBoxContainer"]
+[node name="Remove" type="Button" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Remove"
 
-[node name="ItemsContainer" type="VBoxContainer" parent="ReactiveCollectionContainer"]
+[node name="ReactiveCollectionContainer" type="VBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
+script = ExtResource("3_nu7al")
+_state_item_tscn = ExtResource("4_0g8wu")
 
 [connection signal="text_changed" from="LineEdit" to="." method="_on_line_edit_text_changed"]
-[connection signal="pressed" from="ReactiveCollectionContainer/HBoxContainer/Add" to="ReactiveCollectionContainer" method="add_item"]
-[connection signal="pressed" from="ReactiveCollectionContainer/HBoxContainer/Remove" to="ReactiveCollectionContainer" method="remove_last_item"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/Add" to="VBoxContainer/ReactiveCollectionContainer" method="add_item"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/Remove" to="VBoxContainer/ReactiveCollectionContainer" method="remove_last_item"]
